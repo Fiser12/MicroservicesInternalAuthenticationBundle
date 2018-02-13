@@ -23,10 +23,9 @@
       "/Tests/"
     ]
   },
-  "minimum-stability": "dev",
   "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "master": "1.0"
     }
   }
 }
