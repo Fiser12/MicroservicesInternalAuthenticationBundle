@@ -1,0 +1,32 @@
+{
+  "name": "fiser/microservices-internal-authentication",
+  "type": "symfony-bundle",
+  "description": "Symfony MicroservicesInternalAuthenticationBundle",
+  "keywords": [],
+  "license": "BSD",
+  "authors": [
+    {
+      "name": "Ruben Garcia",
+      "email": "fiser12@icloud.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1.3",
+    "guzzlehttp/guzzle": "^6.3",
+    "symfony/security-bundle": "^4.1@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Fiser\\MicroservicesInternalAuthenticationBundle\\": ""
+    },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "minimum-stability": "dev",
+  "extra": {
+    "branch-alias": {
+      "dev-master": "4.1-dev"
+    }
+  }
+}
