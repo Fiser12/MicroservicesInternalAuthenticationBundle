@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('cookie_name')->defaultValue('Authorization')->end()
                 ->scalarNode('uri')->defaultValue('http://nginx/session/user/decode')->end()
-                ->arrayNode('headers')
+                ->arrayNode('headers')->defaultNull()
                     ->children()
                         ->scalarNode('key')->end()
                         ->scalarNode('value')->end()
