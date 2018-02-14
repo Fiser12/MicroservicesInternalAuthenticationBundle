@@ -9,6 +9,18 @@ If you have one microservice that generate the JWT and the clients send this to 
 This system integrates the microservices authentication with a symfony system authentication.
 
 ## Configuration
+### Installation
+
+The code is in packagist hosted:
+https://packagist.org/packages/fiser/microservices-internal-authentication
+
+For install you can do:
+
+```
+composer require fiser/microservices-internal-authentication
+```
+
+### Configuration files
 Paste in your security file of symfony this:
 ```
 security:
