@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Fiser\MicroservicesInternalAuthenticationBundle\Model;
 
-use LIN3S\SharedKernel\Exception\DomainException;
 use Throwable;
 
-class APISessionErrorException extends DomainException
+class APISessionErrorException extends \Exception
 {
     private $statusCode;
 

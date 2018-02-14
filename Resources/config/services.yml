@@ -1,4 +1,17 @@
 services:
-#    microservices_internal_authentication.example:
-#        class: Fiser\MicroservicesInternalAuthenticationBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    guzzle_http.client:
+        class: GuzzleHttp\Client
+
+    security.token_storage:
+        class: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+
+    fiser.microservices_internal_authentication.security.authenticator:
+        class: Fiser\MicroservicesInternalAuthenticationBundle\Security\Session\JWTAuthenticator
+        arguments:
+         - '@router'
+
+    fiser.microservices_internal_authentication.security.user_provider:
+        class: Fiser\MicroservicesInternalAuthenticationBundle\Security\Session\JWTUserProvider
+        arguments:
+         - '@guzzle_http.client'
+         - '@service_container'
