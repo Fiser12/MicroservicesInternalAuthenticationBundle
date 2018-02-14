@@ -6,12 +6,12 @@ services:
         class: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
 
     fiser.microservices_internal_authentication.security.authenticator:
-        class: Fiser\MicroservicesInternalAuthenticationBundle\Security\Session\JWTAuthenticator
+        class: Fiser\MicroservicesInternalAuthenticationBundle\Security\JWTAuthenticator
         arguments:
          - '@router'
 
     fiser.microservices_internal_authentication.security.user_provider:
-        class: Fiser\MicroservicesInternalAuthenticationBundle\Security\Session\JWTUserProvider
+        class: Fiser\MicroservicesInternalAuthenticationBundle\Security\JWTUserProvider
         arguments:
          - '@guzzle_http.client'
          - '@service_container'

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fiser\MicroservicesInternalAuthenticationBundle\Security\Session;
+namespace Fiser\MicroservicesInternalAuthenticationBundle\Security;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

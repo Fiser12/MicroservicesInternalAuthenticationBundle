@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fiser\MicroservicesInternalAuthenticationBundle\Security\Session;
+namespace Fiser\MicroservicesInternalAuthenticationBundle\Security;
 
 use Fiser\MicroservicesInternalAuthenticationBundle\Model\APISessionErrorException;
 use Fiser\MicroservicesInternalAuthenticationBundle\Model\FirstName;
