@@ -26,14 +26,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('cookie_name')->defaultValue('Authorization')->end()
                 ->scalarNode('uri')->defaultValue('http://nginx/session/user/decode')->end()
- /*
-                    ->arrayNode('headers')->defaultNull()
-                    ->children()
-                        ->scalarNode('key')->end()
-                        ->scalarNode('value')->end()
-                    ->end()
-                ->end()
- */
+                ->variableNode('headers')->end()
             ->end();
 
         return $treeBuilder;
