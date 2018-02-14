@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Fiser\MicroservicesInternalAuthenticationBundle\Model;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 class User implements UserInterface
 {
     private $facebookId;

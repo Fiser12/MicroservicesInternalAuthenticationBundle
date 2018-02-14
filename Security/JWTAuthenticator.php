@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fiser\MicroservicesInternalAuthenticationBundle\Security;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -16,21 +17,26 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class JWTAuthenticator extends AbstractGuardAuthenticator
 {
     private $urlGenerator;
+    private $container;
 
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    public function __construct(
+        UrlGeneratorInterface $urlGenerator,
+        ContainerInterface $container
+    )
     {
         $this->urlGenerator = $urlGenerator;
+        $this->container = $container;
     }
 
     public function supports(Request $request)
     {
-        return $request->cookies->get('Authorization') !== null;
+        return $request->cookies->get($this->container->getParameter('cookie_name')) !== null;
     }
 
     public function getCredentials(Request $request)
     {
         return array(
-            'token' => $request->cookies->get('Authorization'),
+            'token' => $request->cookies->get($this->container->getParameter('cookie_name')),
         );
     }
 
@@ -57,16 +63,16 @@ class JWTAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $loginUrl = $this->urlGenerator->generate('app_home');
+        $loginUrl = $this->urlGenerator->generate('redirection');
         $response = new RedirectResponse($loginUrl);
-        $response->headers->clearCookie('Authorization');
+        $response->headers->clearCookie($this->container->getParameter('cookie_name'));
 
         return $response;
     }
 
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        $loginUrl = $this->urlGenerator->generate('app_home');
+        $loginUrl = $this->urlGenerator->generate('redirection');
 
         return new RedirectResponse($loginUrl);
     }

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Fiser\MicroservicesInternalAuthenticationBundle\Model;
 
-use LIN3S\SharedKernel\Exception\Exception;
-
 class FirstName
 {
     private $firstName;
@@ -14,7 +12,7 @@ class FirstName
     {
         try {
             $this->saveFirstName($fistName);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }
@@ -27,7 +25,7 @@ class FirstName
     protected function saveFirstName(string $firstName): void
     {
         if(empty($firstName)){
-            throw new Exception("First name is empty");
+            throw new \Exception("First name is empty");
         }
         $this->firstName = $firstName;
     }

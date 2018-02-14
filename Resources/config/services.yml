@@ -9,6 +9,7 @@ services:
         class: Fiser\MicroservicesInternalAuthenticationBundle\Security\JWTAuthenticator
         arguments:
          - '@router'
+         - '@service_container'
 
     fiser.microservices_internal_authentication.security.user_provider:
         class: Fiser\MicroservicesInternalAuthenticationBundle\Security\JWTUserProvider

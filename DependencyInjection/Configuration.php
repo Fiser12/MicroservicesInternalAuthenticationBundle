@@ -19,10 +19,20 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('microservices_internal_authentication');
-
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+        $rootNode
+            ->children()
+                ->scalarNode('cookie_name')->defaultValue('Authorization')->end()
+                ->scalarNode('uri')->defaultValue('http://nginx/session/user/decode')->end()
+                ->arrayNode('headers')
+                    ->children()
+                        ->scalarNode('key')->end()
+                        ->scalarNode('value')->end()
+                    ->end()
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }

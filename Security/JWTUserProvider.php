@@ -35,7 +35,7 @@ class JWTUserProvider implements UserProviderInterface
             try {
                 $response = $this->client->request(
                     'GET',
-                    'http://nginx/session/user/decode',
+                    $this->container->getParameter('uri'),
                     [
                         'headers' => [
                             'token-api' => $this->container->getParameter('secret'),
