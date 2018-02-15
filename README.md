@@ -50,3 +50,5 @@ microservices_internal_authentication:
     redirection: redirection
     token-api: secret
 ```
+
+Furthermore you can create your specific changing the response processor creating your own class if you implements JWTResponseProcessorInterface in this.
