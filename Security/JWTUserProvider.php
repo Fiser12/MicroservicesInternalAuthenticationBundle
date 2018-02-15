@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace Fiser\MicroservicesInternalAuthenticationBundle\Security;
 
 use Fiser\MicroservicesInternalAuthenticationBundle\Model\APISessionErrorException;
-use Fiser\MicroservicesInternalAuthenticationBundle\Model\FirstName;
-use Fiser\MicroservicesInternalAuthenticationBundle\Model\FullName;
-use Fiser\MicroservicesInternalAuthenticationBundle\Model\LastName;
-use Fiser\MicroservicesInternalAuthenticationBundle\Model\User;
-use Fiser\MicroservicesInternalAuthenticationBundle\Model\UserEmail;
-use Fiser\MicroservicesInternalAuthenticationBundle\Model\UserFacebookId;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -22,14 +16,20 @@ class JWTUserProvider implements UserProviderInterface
 {
     private $client;
     private $container;
+    private $responseProcessor;
 
-    public function __construct(Client $client, ContainerInterface $container)
+    public function __construct(
+        Client $client,
+        ContainerInterface $container,
+        JWTResponseProcessorInterface $responseProcessor
+    )
     {
         $this->client = $client;
         $this->container = $container;
+        $this->responseProcessor = $responseProcessor;
     }
 
-    public function loadUserByUsername($jwt): ?User
+    public function loadUserByUsername($jwt): ?UserInterface
     {
         try {
             try {
@@ -56,16 +56,8 @@ class JWTUserProvider implements UserProviderInterface
             }
 
             $response = json_decode($response->getBody()->getContents(), true);
-
-            $user = new User(
-                new UserFacebookId($response['user']['id']),
-                new UserEmail($response['user']['email']),
-                new FullName(
-                    new FirstName($response['user']['first_name']),
-                    new LastName($response['user']['last_name'])
-                ),
-                $jwt
-            );
+            $response['jwt'] = $jwt;
+            $user = $this->responseProcessor->process($response);
 
         } catch (APISessionErrorException $exception) {
             return null;
@@ -74,19 +66,18 @@ class JWTUserProvider implements UserProviderInterface
         return $user;
     }
 
-    public function refreshUser(UserInterface $user): ?User
+    public function refreshUser(UserInterface $user): ?UserInterface
     {
-        if (!$user instanceof User) {
+        if (!get_class($user) === $this->responseProcessor->supportClass()) {
             throw new UnsupportedUserException(
                 sprintf('Instances of "%s" are not supported.', get_class($user))
             );
         }
-
         return $this->loadUserByUsername($user->jwt());
     }
 
     public function supportsClass($class): string
     {
-        return User::class;
+        return $this->responseProcessor->supportClass();
     }
 }

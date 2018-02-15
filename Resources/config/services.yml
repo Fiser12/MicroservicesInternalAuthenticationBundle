@@ -16,3 +16,7 @@ services:
         arguments:
          - '@guzzle_http.client'
          - '@service_container'
+         - '@fiser.microservices_internal_authentication.security.default_processor'
+
+    fiser.microservices_internal_authentication.security.default_processor:
+        class: Fiser\MicroservicesInternalAuthenticationBundle\Security\JWTResponseProcessor
