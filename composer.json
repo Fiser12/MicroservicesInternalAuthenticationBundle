@@ -13,8 +13,8 @@
   "require": {
     "php": "^7.1.3",
     "guzzlehttp/guzzle": "^6.3",
-    "symfony/symfony": ">=3.0.0",
-    "symfony/security-bundle": ">=3.0.0"
+    "symfony/symfony": "*",
+    "symfony/security-bundle": "*"
   },
   "autoload": {
     "psr-4": {
