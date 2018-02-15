@@ -40,10 +40,13 @@ security:
         - { path: ^/recipes/, roles: ROLE_USER }
 ```
 
-In your config.yml you need to define this elements for configure the bundle:
+In your config.yml you need to define this elements for configure the bundle
+The config values are not necessary if you not put this are the default values:
 
 ```
-
-TODO
-
+microservices_internal_authentication:
+    cookie_name: Authorization
+    uri: http://nginx/session/user/decode
+    redirection: redirection
+    token-api: secret
 ```
