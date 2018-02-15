@@ -23,7 +23,7 @@ class MicroservicesInternalAuthenticationExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter("cookie_name", $config["cookie_name"]);
-        $container->setParameter("uri", $config["uri"]);
+        $container->setParameter("uri-login-failed", $config["uri-login-failed"]);
         $container->setParameter("headers", $config["headers"]);
         $container->setParameter("redirection", $config["redirection"]);
 
