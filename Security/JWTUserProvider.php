@@ -35,11 +35,9 @@ class JWTUserProvider implements UserProviderInterface
             try {
                 $response = $this->client->request(
                     'GET',
-                    $this->container->getParameter('uri'),
+                    $this->container->getParameter('uri-login-failed'),
                     [
-                        'headers' => [
-                            'token-api' => $this->container->getParameter('secret'),
-                        ],
+                        'headers' => $this->container->getParameter('headers'),
                         'query' => ['jwt' => $jwt]
                     ]
                 );

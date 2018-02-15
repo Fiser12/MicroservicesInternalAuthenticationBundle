@@ -25,7 +25,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('cookie_name')->defaultValue('Authorization')->end()
-                ->scalarNode('uri')->defaultValue('http://nginx/session/user/decode')->end()
+                ->scalarNode('uri-login-failed')->defaultValue('http://nginx/session/user/decode')->end()
                 ->scalarNode('redirection')->defaultValue('redirection')->end()
                 ->variableNode('headers')->defaultValue(['token-api' => 'secret'])->end()
             ->end();
