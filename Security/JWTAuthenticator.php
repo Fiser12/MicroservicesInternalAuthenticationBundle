@@ -63,7 +63,7 @@ class JWTAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $loginUrl = $this->urlGenerator->generate('redirection');
+        $loginUrl = $this->urlGenerator->generate($this->container->getParameter('redirection'));
         $response = new RedirectResponse($loginUrl);
         $response->headers->clearCookie($this->container->getParameter('cookie_name'));
 
@@ -72,7 +72,7 @@ class JWTAuthenticator extends AbstractGuardAuthenticator
 
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        $loginUrl = $this->urlGenerator->generate('redirection');
+        $loginUrl = $this->urlGenerator->generate($this->container->getParameter('redirection'));
 
         return new RedirectResponse($loginUrl);
     }

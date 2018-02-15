@@ -25,6 +25,7 @@ class MicroservicesInternalAuthenticationExtension extends Extension
         $container->setParameter("cookie_name", $config["cookie_name"]);
         $container->setParameter("uri", $config["uri"]);
         $container->setParameter("headers", $config["headers"]);
+        $container->setParameter("redirection", $config["redirection"]);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
