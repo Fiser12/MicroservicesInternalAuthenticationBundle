@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fiser\MicroservicesInternalAuthenticationBundle\Security;
 
+use Fiser\MicroservicesInternalAuthenticationBundle\Model\AnonymousUser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +46,7 @@ class JWTAuthenticator extends AbstractGuardAuthenticator
         $apiKey = $credentials['token'];
 
         if (null === $apiKey) {
-            return null;
+            return new AnonymousUser();
         }
 
         return $userProvider->loadUserByUsername($apiKey);
