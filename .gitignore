@@ -7,3 +7,4 @@
 .editorconfig
 .DS_Store
 /vendor
+/composer.lock

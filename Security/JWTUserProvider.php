@@ -73,6 +73,9 @@ class JWTUserProvider implements UserProviderInterface
                 sprintf('Instances of "%s" are not supported.', get_class($user))
             );
         }
+        if($user instanceof AnonymousUser) {
+            return $user;
+        }
         return $this->loadUserByUsername($user->jwt());
     }
 
