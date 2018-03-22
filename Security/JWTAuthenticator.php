@@ -6,7 +6,7 @@ namespace Fiser\MicroservicesInternalAuthenticationBundle\Security;
 
 use Fiser\MicroservicesInternalAuthenticationBundle\Model\AnonymousUser;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -64,18 +64,12 @@ class JWTAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $loginUrl = $this->urlGenerator->generate($this->container->getParameter('redirection'));
-        $response = new RedirectResponse($loginUrl);
-        $response->headers->clearCookie($this->container->getParameter('cookie_name'));
-
-        return $response;
+        return new JsonResponse(['Error' => $exception->getMessage()], 401);
     }
 
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        $loginUrl = $this->urlGenerator->generate($this->container->getParameter('redirection'));
-
-        return new RedirectResponse($loginUrl);
+        return new JsonResponse(['Error' => 'Please start the authentication'], 401);
     }
 
     public function supportsRememberMe()

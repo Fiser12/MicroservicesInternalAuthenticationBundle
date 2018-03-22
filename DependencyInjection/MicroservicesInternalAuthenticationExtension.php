@@ -23,9 +23,8 @@ class MicroservicesInternalAuthenticationExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter("cookie_name", $config["cookie_name"]);
-        $container->setParameter("uri-login-failed", $config["uri-login-failed"]);
+        $container->setParameter("uri-authentication", $config["uri-authentication"]);
         $container->setParameter("headers", $config["headers"]);
-        $container->setParameter("redirection", $config["redirection"]);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

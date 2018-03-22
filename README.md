@@ -47,6 +47,5 @@ The config values are not necessary if you not put this are the default values:
 microservices_internal_authentication:
     cookie_name: Authorization
     uri: http://nginx/session/user/decode
-    redirection: redirection
     token-api: secret
 ```

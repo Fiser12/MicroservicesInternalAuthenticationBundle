@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fiser\MicroservicesInternalAuthenticationBundle\Security;
 
+use Fiser\MicroservicesInternalAuthenticationBundle\Model\AnonymousUser;
 use Fiser\MicroservicesInternalAuthenticationBundle\Model\APISessionErrorException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -35,7 +36,7 @@ class JWTUserProvider implements UserProviderInterface
             try {
                 $response = $this->client->request(
                     'GET',
-                    $this->container->getParameter('uri-login-failed'),
+                    $this->container->getParameter('uri-authentication'),
                     [
                         'headers' => $this->container->getParameter('headers'),
                         'query' => ['jwt' => $jwt]
