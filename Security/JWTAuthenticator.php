@@ -64,7 +64,7 @@ class JWTAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new JsonResponse(['Error' => $exception->getMessage()], 401);
+        return new JsonResponse(['Error' => 'JWT is lapsed'], 401);
     }
 
     public function start(Request $request, AuthenticationException $authException = null)
